@@ -79,7 +79,7 @@ Express has a rich ecosystem and you will likely find a package that solves the 
 
 #### Application-level middleware
 
-Application-level middleware are bound to an *instance of Express* using `app.use` or using `app.<METHOD>` (e.g. `app.get`, `app.post`) functions. These are middleware functions that are executed in every incoming request matching the specified path. If you don't specify a path, the path defaults to `/` which will match every incoming request. As with any middleware functions, they will not run if the request-response cycle ends before reaching them. Typically, these middleware functions are placed on top of your application code to ensure they always run first.
+Application-level middleware are bound to an *instance of Express* using `app.use` or using `app.METHOD` (e.g. `app.get`, `app.post`) functions. These are middleware functions that are executed in every incoming request matching the specified path. If you don't specify a path, the path defaults to `/` which will match every incoming request. As with any middleware functions, they will not run if the request-response cycle ends before reaching them. Typically, these middleware functions are placed on top of your application code to ensure they always run first.
 
 Very common built-in middleware functions that you will likely use are the following:
 
@@ -110,7 +110,7 @@ app.use(myMiddleware);
 
 In this example, the middleware function logs a message, adds a custom property to the request object, and then calls the `next()` function to pass control to the next middleware function or route handler. We also register the middleware function through the usage of `app.use` which makes this an application-level middleware. Middleware functions following `myMiddleware` in this chain can now access `req.customProperty` with the value `"Hello from myMiddleware"`.
 
-One thing to note is that middleware functions are executed in the order they are defined or registered in your application. This means that the sequence in which you define your middleware functions matters, as it determines the order in which they will be invoked during the request-response cycle. So you need to make sure and be aware that your middleware fnuctions are placed in the correct order. As an example, some packages have middleware functions that changes the `Request` object, and as a result, these middleware functions should be placed at the very top of your application in order for you to be able to see their changes in all of your middleware functions below it.
+One thing to note is that middleware functions are executed in the order they are defined or registered in your application. This means that the sequence in which you define your middleware functions matters, as it determines the order in which they will be invoked during the request-response cycle. So you need to make sure and be aware that your middleware functions are placed in the correct order. As an example, some packages have middleware functions that changes the `Request` object, and as a result, these middleware functions should be placed at the very top of your application in order for you to be able to see their changes in all of your middleware functions below it.
 
 There is also a special type of middleware function that handles errors, which we will discuss shortly.
 
